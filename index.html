@@ -12,15 +12,15 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="pin-generator half-width">
-                    <input id="genaretPin" class="form-control" type="text">
-                    <button onclick="pinGenerat()" class="generate-btn">Generate Pin</button>
+                    <input id="generate-code" class="form-control" type="text">
+                    <button onclick="generatePin()" class="generate-btn">Generate Pin</button>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-section half-width">
-                    <input id="typed-digit" class="form-control" type="text">
-                    <div class="numbers">
-                        <div id="digit-container" class="calc-body">
+                    <input id="displayTypedPin" class="form-control" type="text">
+                    <div id="digit" class="numbers">
+                        <div class="calc-body">
                             <div class="calc-button-row">
                               <div class="button">7</div>
                               <div class="button">8</div>
@@ -42,7 +42,7 @@
                                 <div class="button">C</div>
                             </div>
                             <div>
-                                <button onclick="verifyPin()" type="submit" class="submit-btn">Submit</button>
+                                <button onclick="submit()" type="submit" class="submit-btn">Submit</button>
                                 <p class="action-left">3 try left</p>
                             </div>
                     </div>
@@ -54,69 +54,6 @@
             <p id="correct" class="notify">✅ Pin Matched... Secret door is opening for you</p>
         </div>
     </div>
-
-    <script>
-        // document.getElementById('genaretBtn').addEventListener('click', function(){
-            // const pinGenerat = Math.ceil(Math.random()*10000);
-            // const pinInput = document.getElementById('genaretPin').value;
-            // const pinInputNumber = parseInt(pinInput);
-            // document.getElementById('genaretPin').value = pinGenerat;
-        // })
-        function getInput(){
-            const random = Math.random()*10000;
-            const pin = (random + '').split('.')[0];
-            
-            if(pin.length === 4){
-                return pin;
-            }
-            else{
-                return getInput();
-            }
-        }
-        // display generated pin
-        function pinGenerat(){
-            const pinInput = document.getElementById('genaretPin');
-            pinInput.value = getInput();
-        }
-        // handle event button
-        document.getElementById('digit-container').addEventListener('click', function(event){
-            const digit = event.target.innerText;
-            if(isNaN(digit)){
-                if(digit === 'C'){
-                    const typedPin = document.getElementById('typed-digit');
-                    typedPin.value = '';
-                }
-                if(digit === '<'){
-                    // const typedPin = document.getElementById('typed-digit');
-                    // typedPin.value =  typedPin.value - digit ;
-                }
-            }
-            else{
-                const typedPin = document.getElementById('typed-digit');
-                typedPin.value = typedPin.value + digit;
-            }
-        })
-
-        function verifyPin(){
-            const verifygenaretPin = document.getElementById('genaretPin').value;
-            const verifyTypedDigit = document.getElementById('typed-digit').value;
-            if(verifyTypedDigit === verifygenaretPin){
-                // document.getElementById('correct').style.display = 'block';
-                // document.getElementById('incorrect').style.display = 'none';
-                notify( 'block', 'none');
-            }
-            else{
-                notify('none', 'block');
-                // document.getElementById('correct').style.display = 'none';
-                // document.getElementById('incorrect').style.display = 'block'; 
-            }
-        }
-        // display match result
-        function notify( correctStatus, incorrectStatus){
-            document.getElementById('correct').style.display = correctStatus;
-            document.getElementById('incorrect').style.display = incorrectStatus;
-        }
-        
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
